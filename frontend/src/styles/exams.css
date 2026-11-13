@@ -1,0 +1,27 @@
+body { background: #f5f7fb; color: #182238; font-family: Inter, ui-sans-serif, system-ui, sans-serif; }
+.exams-page { width: min(100% - 40px, 980px); margin: 64px auto; }
+.exams-header { margin-bottom: 32px; }
+.exams-kicker { color: #5268cf; font-size: 12px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.exams-header h1 { margin: 8px 0; font-size: clamp(36px, 6vw, 54px); }
+.exams-header p:last-child { color: #69758a; }
+.exam-form { display: grid; grid-template-columns: 1fr 1fr auto; align-items: end; gap: 14px; padding: 22px; margin-bottom: 36px; border: 1px solid #e0e5ef; border-radius: 14px; background: white; }
+.exam-form label { display: grid; gap: 8px; color: #59657b; font-size: 13px; font-weight: 600; }
+.exam-form input { min-width: 0; padding: 12px; border: 1px solid #dce2ed; border-radius: 8px; color: #182238; }
+.exam-form button, .error-panel button { padding: 12px 16px; border: 0; border-radius: 8px; background: #5268cf; color: white; font-weight: 700; }
+.section-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.section-heading h2 { font-size: 20px; }
+.refresh-button, .delete-button { padding: 8px 12px; border: 1px solid #dce2ed; border-radius: 7px; background: white; color: #33415f; }
+.table-wrap { overflow: hidden; border: 1px solid #e0e5ef; border-radius: 12px; background: white; }
+table { width: 100%; border-collapse: collapse; text-align: left; }
+th, td { padding: 15px 18px; border-bottom: 1px solid #edf0f5; }
+th { color: #788399; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+tr:last-child td { border-bottom: 0; }
+.delete-button { color: #b83e51; }
+.empty-state { padding: 20px; color: #69758a; }
+.skeleton-list { display: grid; gap: 10px; }
+.skeleton-row { display: grid; grid-template-columns: 80px 1fr 130px; gap: 16px; padding: 18px; border-radius: 10px; background: white; }
+.skeleton-row span { height: 14px; border-radius: 8px; background: linear-gradient(90deg, #e8ecf3, #f4f6fa, #e8ecf3); background-size: 200% 100%; animation: shimmer 1.3s infinite; }
+.error-panel { padding: 24px; border: 1px solid #f1c8cd; border-radius: 12px; background: #fff7f7; color: #8d2f3d; }
+.error-panel p { margin-top: 0; }
+@keyframes shimmer { to { background-position: -200% 0; } }
+@media (max-width: 700px) { .exam-form { grid-template-columns: 1fr; } .table-wrap { overflow-x: auto; } table { min-width: 600px; } }

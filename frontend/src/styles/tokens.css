@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap');
+
+:root {
+  font-family: 'DM Sans', 'Helvetica Neue', sans-serif;
+  color: #f5f1e9;
+  background: #11100e;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  --color-bg: #11100e;
+  --color-panel: #1a1916;
+  --color-text: #f5f1e9;
+  --color-muted: #9c9991;
+  --color-accent: #d9a65a;
+  --color-line: rgba(245, 241, 233, .15);
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --page-gutter: clamp(22px, 6.2vw, 96px);
+}

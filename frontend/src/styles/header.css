@@ -1,0 +1,13 @@
+.site-header { height: 88px; padding: 0 var(--page-gutter); display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid var(--color-line); position: relative; z-index: 2; }
+.brand { display: inline-flex; align-items: center; gap: 11px; min-width: 230px; }
+.brand-mark { width: 34px; height: 34px; display: grid; place-items: center; border: 1px solid var(--color-accent); color: var(--color-accent); font: italic 22px var(--font-display); transform: rotate(-8deg); }
+.brand-name { font-size: 12px; letter-spacing: .2em; color: var(--color-muted); }
+.brand-name strong { color: var(--color-text); font-weight: 600; }
+.main-nav { display: flex; align-items: center; gap: clamp(22px, 4vw, 58px); }
+.nav-link { color: #aaa69e; font-size: 12px; letter-spacing: .035em; transition: color .2s; }
+.nav-link:hover, .nav-link.is-active { color: var(--color-text); }
+.nav-link.is-active::after { content: ''; display: block; width: 4px; height: 4px; margin: 8px auto -12px; border-radius: 50%; background: var(--color-accent); }
+.header-cta { min-width: 150px; padding: 13px 16px; display: flex; align-items: center; justify-content: space-between; border: 1px solid rgba(217,166,90,.65); color: var(--color-accent); font-size: 11px; letter-spacing: .04em; transition: background .2s, color .2s; }
+.header-cta:hover { background: var(--color-accent); color: var(--color-bg); }
+.header-cta span { font-size: 16px; }
+@media (max-width: 760px) { .site-header { height: 72px; } .brand { min-width: auto; } .main-nav { display: none; } .header-cta { min-width: 128px; padding: 11px 12px; } }

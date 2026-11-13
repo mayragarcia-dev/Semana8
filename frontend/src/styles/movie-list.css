@@ -1,0 +1,7 @@
+.movie-list-section { padding: 94px var(--page-gutter) 110px; background: var(--color-bg); scroll-margin-top: 25px; }
+.movie-list-section__intro { margin-bottom: 32px; display: flex; align-items: end; justify-content: space-between; gap: 25px; }
+.movie-list-section__eyebrow { margin: 0 0 12px; color: var(--color-accent); font-size: 9px; letter-spacing: .22em; }
+.movie-list-section h2 { margin: 0; color: var(--color-text); font: 400 clamp(32px, 4vw, 48px)/1.1 var(--font-display); letter-spacing: -.035em; }
+.movie-list-section__note { margin: 0 0 5px; color: var(--color-muted); font-size: 11px; }
+.movie-list { display: grid; grid-template-columns: repeat(var(--movie-columns, 4), minmax(0, 1fr)); gap: 16px; }
+@media (max-width: 720px) { .movie-list-section { padding-top: 68px; padding-bottom: 76px; } .movie-list { gap: 11px; } .movie-list-section__intro { align-items: start; flex-direction: column; } }

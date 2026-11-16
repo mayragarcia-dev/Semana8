@@ -31,7 +31,7 @@ npm install
 npm run dev
 ```
 
-Vite muestra la dirección local al iniciar; normalmente es `http://localhost:5173/`. La configuración de Django permite solicitudes CORS desde ese origen. El cliente centraliza la dirección de la API y las operaciones para exámenes en `frontend/src/services/apiClient.js`.
+Vite muestra la dirección local al iniciar; normalmente es `http://localhost:5180/`. La configuración de Django permite solicitudes CORS desde ese origen. El cliente centraliza la dirección de la API y las operaciones para exámenes en `frontend/src/services/apiClient.js`.
 
 La pantalla permite listar exámenes, crear uno nuevo y eliminarlo. Mientras carga, muestra un esqueleto; si la solicitud falla, ofrece un botón para reintentar.
 
@@ -77,6 +77,10 @@ Las preguntas incluyen sus opciones como una lista anidada. El campo `exam` cont
 
 ## Configuración de desarrollo
 
-- CORS permite `http://localhost:5173` mediante `django-cors-headers`.
+- CORS permite `http://localhost:5180` mediante `django-cors-headers`.
 - La API permite solicitudes sin autenticación (`AllowAny`) para el laboratorio.
 - La base de datos de desarrollo es SQLite (`db.sqlite3`).
+
+
+## Evidencias del laboratorio 12
+Consulta [el entregable y la guía de capturas](docs/ENTREGABLE_LAB12.md).

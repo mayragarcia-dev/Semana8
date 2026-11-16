@@ -1,16 +1,22 @@
-# React + Vite
+# Cliente web de exámenes
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Interfaz de React 19 y Vite que consume la API de exámenes del proyecto Django. La guía de inicio completa y las rutas disponibles están en el [README principal](../README.md).
 
-Currently, two official plugins are available:
+## Desarrollo local
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Desde esta carpeta instala las dependencias e inicia Vite:
 
-## React Compiler
+```powershell
+npm install
+npm run dev
+```
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Abre la URL que muestra Vite (por defecto `http://localhost:5173/`). La API Django debe estar ejecutándose en `http://127.0.0.1:8000/`.
 
-## Expanding the Oxlint configuration
+## Estructura relevante
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+- `src/services/apiClient.js`: configuración central de Axios y operaciones para listar, crear y eliminar exámenes.
+- `src/App.jsx`: formulario y listado; gestiona carga, errores y reintento.
+- `src/styles/exams.css`: estilos de la pantalla, la tabla, el esqueleto y los errores.
+
+Para generar una compilación de producción ejecuta `npm run build`.

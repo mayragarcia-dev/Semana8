@@ -1,53 +1,82 @@
-# Quiz API
+# Quiz API y cliente React
 
-Proyecto Django mínimo para gestionar exámenes, preguntas y opciones con Django REST Framework.
+Proyecto académico que integra una API REST para exámenes, preguntas y opciones, construida con Django REST Framework, y una interfaz React con Vite para listar y gestionar exámenes.
 
-## Instalación y ejecución
+## Requisitos
 
-```bash
+- Python 3.10 o posterior
+- Node.js y npm
+
+## Iniciar la API
+
+Desde la raíz del repositorio, crea un entorno virtual, instala las dependencias y aplica las migraciones:
+
+```powershell
 python -m venv .venv
-# Windows: .venv\Scripts\activate
-pip install -r requirements.txt
+.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
 python manage.py migrate
-python manage.py runserver
+python manage.py runserver 127.0.0.1:8000
 ```
 
-La API queda disponible bajo `/api/` (`/api/exams/`, `/api/questions/` y `/api/options/`).
+La API REST Framework queda disponible en `http://127.0.0.1:8000/api/`. Desde el navegador puedes comprobar la raíz y seguir sus enlaces a los recursos.
 
-## Representación de relaciones
+## Iniciar el cliente React
 
-Cada pregunta incluye sus `options` como una lista anidada que se puede leer y escribir: al crear o actualizar una pregunta se envían sus opciones en el mismo cuerpo. El examen asociado se representa mediante el campo `exam`, que transporta el identificador de un examen. Las opciones también pueden gestionarse de forma independiente mediante `/api/options/`, indicando `question` como identificador.
+En otra terminal, desde la raíz del repositorio:
 
-La validación del serializador de pregunta exige exactamente una opción correcta entre las opciones enviadas. Al reemplazar las opciones de una pregunta, la regla se vuelve a comprobar.
+```powershell
+cd frontend
+npm install
+npm run dev
+```
 
-La paginación global es por número de página, con 10 registros por página. El permiso inicial es `AllowAny`, apropiado para desarrollo del curso; puede endurecerse al añadir autenticación.
+Vite muestra la dirección local al iniciar; normalmente es `http://localhost:5173/`. La configuración de Django permite solicitudes CORS desde ese origen. El cliente centraliza la dirección de la API y las operaciones para exámenes en `frontend/src/services/apiClient.js`.
 
-## Filtrado y búsqueda
+La pantalla permite listar exámenes, crear uno nuevo y eliminarlo. Mientras carga, muestra un esqueleto; si la solicitud falla, ofrece un botón para reintentar.
 
-El recurso de preguntas admite `?exam=<id>` para filtrar por examen y `?search=<texto>` para buscar en el enunciado. Ambos parámetros se pueden combinar; la paginación se controla con `?page=<número>`.
+## Recursos de la API
 
-## Tabla de la API
+| Recurso | URL local | Métodos principales |
+|---|---|---|
+| Raíz | `http://127.0.0.1:8000/api/` | GET |
+| Exámenes | `http://127.0.0.1:8000/api/exams/` | GET, POST |
+| Examen individual | `http://127.0.0.1:8000/api/exams/{id}/` | GET, PUT, PATCH, DELETE |
+| Preguntas | `http://127.0.0.1:8000/api/questions/` | GET, POST |
+| Pregunta individual | `http://127.0.0.1:8000/api/questions/{id}/` | GET, PUT, PATCH, DELETE |
+| Opciones | `http://127.0.0.1:8000/api/options/` | GET, POST |
+| Opción individual | `http://127.0.0.1:8000/api/options/{id}/` | GET, PUT, PATCH, DELETE |
 
-| Recurso | Dirección | Método | Cuerpo de ejemplo | Respuesta esperada |
-|---|---|---|---|---|
-| Exámenes | `/api/exams/` | GET | — | 200, lista paginada |
-| Exámenes | `/api/exams/` | POST | `{"title": "Examen de prueba", "description": "Semana 8"}` | 201, examen creado |
-| Examen | `/api/exams/{id}/` | GET | — | 200, examen |
-| Examen | `/api/exams/{id}/` | PUT | `{"title": "Examen", "description": "Actualizado"}` | 200, examen actualizado |
-| Examen | `/api/exams/{id}/` | PATCH | `{"description": "Actualizado"}` | 200, examen actualizado |
-| Examen | `/api/exams/{id}/` | DELETE | — | 204, sin contenido |
-| Preguntas | `/api/questions/` | GET | — | 200, lista paginada; admite `?exam=` y `?search=` |
-| Preguntas | `/api/questions/` | POST | `{"exam": 1, "text": "¿Cuánto es 2+2?", "options": [{"text": "4", "is_correct": true}, {"text": "5", "is_correct": false}]}` | 201, pregunta con opciones |
-| Pregunta | `/api/questions/{id}/` | GET | — | 200, pregunta con opciones |
-| Pregunta | `/api/questions/{id}/` | PUT | Cuerpo completo con `exam`, `text` y `options` | 200, pregunta actualizada |
-| Pregunta | `/api/questions/{id}/` | PATCH | `{"text": "Nuevo enunciado"}` o `{"options": [...]}` | 200, pregunta actualizada |
-| Pregunta | `/api/questions/{id}/` | DELETE | — | 204, sin contenido |
-| Opciones | `/api/options/` | GET | — | 200, lista paginada |
-| Opciones | `/api/options/` | POST | `{"question": 1, "text": "Ninguna", "is_correct": false}` | 201, opción creada |
-| Opción | `/api/options/{id}/` | GET | — | 200, opción |
-| Opción | `/api/options/{id}/` | PUT | `{"question": 1, "text": "Ninguna", "is_correct": false}` | 200, opción actualizada |
-| Opción | `/api/options/{id}/` | PATCH | `{"text": "Ninguna de las anteriores"}` | 200, opción actualizada |
-| Opción | `/api/options/{id}/` | DELETE | — | 204, sin contenido |
-| Errores | `/api/exams/` | POST | `{"description": "Sin título"}` | 400, `{"title": ["Este campo es requerido."]}` |
-| Errores | `/api/exams/` | POST | `{"title": ["No es texto"]}` | 400, `{"title": ["No es una cadena válida."]}` |
-| Errores | `/api/questions/` | POST | Pregunta con dos opciones correctas | 400, `{"options": ["La pregunta debe tener exactamente una opción correcta."]}` |
+Las listas usan paginación por número de página, con 10 registros por página. El recurso de preguntas admite `?exam=<id>` para filtrar por examen, `?search=<texto>` para buscar en el enunciado y `?page=<número>` para cambiar de página.
+
+## Ejemplos de solicitudes
+
+Crear un examen:
+
+```json
+{
+  "title": "Examen de prueba",
+  "description": "Semana 8"
+}
+```
+
+Crear una pregunta con sus opciones (debe haber exactamente una opción correcta):
+
+```json
+{
+  "exam": 1,
+  "text": "¿Cuánto es 2 + 2?",
+  "options": [
+    { "text": "4", "is_correct": true },
+    { "text": "5", "is_correct": false }
+  ]
+}
+```
+
+Las preguntas incluyen sus opciones como una lista anidada. El campo `exam` contiene el identificador del examen asociado. Las opciones también pueden administrarse por separado en `/api/options/`, enviando el identificador de su pregunta en `question`.
+
+## Configuración de desarrollo
+
+- CORS permite `http://localhost:5173` mediante `django-cors-headers`.
+- La API permite solicitudes sin autenticación (`AllowAny`) para el laboratorio.
+- La base de datos de desarrollo es SQLite (`db.sqlite3`).

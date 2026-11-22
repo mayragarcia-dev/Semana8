@@ -29,3 +29,12 @@ body { min-height: 100vh; background: #f4f6fb; color: #17213b; font-family: Inte
 .product-skeleton span:last-child { width: 60%; margin-top: 9px; }
 @keyframes catalog-shimmer { to { background-position: -200% 0; } }
 @media (max-width: 560px) { .catalog-page { width: calc(100% - 28px); margin-top: 32px; } .catalog-hero { align-items: start; flex-direction: column; } }
+
+.catalog-actions, .product-actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.catalog-actions a { text-decoration: none; }
+.catalog-filter { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-bottom: 20px; font-weight: 700; }
+.catalog-filter select { padding: 9px 12px; border: 1px solid #cbd4e6; border-radius: 8px; background: #fff; color: inherit; font: inherit; }
+.product-actions { margin-top: 16px; }
+.product-actions a, .product-actions button { font-size: 14px; font-weight: 700; }
+.product-actions a { color: #465bc1; }
+.product-actions button { padding: 6px 10px; border: 1px solid #edc6cc; border-radius: 8px; background: #fff; color: #8d2f3d; }

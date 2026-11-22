@@ -1,3 +1,4 @@
+import { loadAllPages } from './loadAllPages.js'
 import apiClient from './apiClient.js'
 
 const endpoint = 'categories/'
@@ -24,4 +25,8 @@ export async function updateCategory(id, category) {
 
 export async function deleteCategory(id) {
   await apiClient.delete(`${endpoint}${id}/`)
+}
+
+export function listAllCategories() {
+  return loadAllPages(listCategories)
 }
